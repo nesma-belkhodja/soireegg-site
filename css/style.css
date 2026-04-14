@@ -691,6 +691,9 @@ strong, b {
     background: #FF00FF;
     color: #000000;
     border-color: #FF00FF;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
 }
 
 .export-btn:hover {
@@ -756,11 +759,13 @@ strong, b {
     background: #000000;
     border: 3px solid #00FF00;
     padding: 1rem;
+    -webkit-overflow-scrolling: touch;
 }
 
 .rsvp-table {
     width: 100%;
     border-collapse: collapse;
+    min-width: 600px;
 }
 
 .rsvp-table th,
@@ -769,6 +774,8 @@ strong, b {
     text-align: left;
     border-bottom: 2px solid #00FF00;
     font-size: 1.3rem;
+    word-wrap: break-word;
+    max-width: 200px;
 }
 
 .rsvp-table th {
@@ -969,6 +976,71 @@ strong, b {
         font-size: 1.4rem;
         padding: 0.9rem 1.8rem;
     }
+
+    /* Admin Responsive */
+    .admin-container {
+        padding: 1rem;
+    }
+
+    .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .dashboard-header h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .dashboard-actions {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .export-btn, .logout-btn {
+        width: 100%;
+        padding: 1rem;
+        font-size: 1.4rem;
+    }
+
+    .admin-dashboard {
+        padding: 1rem;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .stat-card {
+        padding: 1.5rem;
+    }
+
+    .stat-card h3 {
+        font-size: 2.5rem;
+    }
+
+    .stat-card p {
+        font-size: 1.3rem;
+    }
+
+    .rsvp-table-container {
+        padding: 0.5rem;
+    }
+
+    .rsvp-table th,
+    .rsvp-table td {
+        padding: 0.8rem;
+        font-size: 1.2rem;
+    }
+
+    .rsvp-table th {
+        font-size: 1.3rem;
+    }
+
+    .admin-login {
+        margin: 2rem auto;
+        padding: 2rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1159,6 +1231,55 @@ strong, b {
         font-size: 1.3rem;
         padding: 0.85rem 1.7rem;
     }
+
+    /* Admin Responsive */
+    .admin-container {
+        padding: 0.75rem;
+    }
+
+    .dashboard-header h2 {
+        font-size: 1.8rem;
+    }
+
+    .export-btn, .logout-btn {
+        font-size: 1.3rem;
+        padding: 0.9rem;
+    }
+
+    .admin-dashboard {
+        padding: 0.75rem;
+    }
+
+    .stat-card {
+        padding: 1.2rem;
+    }
+
+    .stat-card h3 {
+        font-size: 2.2rem;
+    }
+
+    .stat-card p {
+        font-size: 1.2rem;
+    }
+
+    .rsvp-table-container {
+        padding: 0.4rem;
+    }
+
+    .rsvp-table th,
+    .rsvp-table td {
+        padding: 0.7rem;
+        font-size: 1.1rem;
+    }
+
+    .rsvp-table th {
+        font-size: 1.2rem;
+    }
+
+    .admin-login {
+        padding: 1.5rem;
+        margin: 1.5rem auto;
+    }
 }
 
 @media (max-width: 375px) {
@@ -1326,6 +1447,55 @@ strong, b {
         font-size: 1.2rem;
         padding: 0.8rem 1.6rem;
         letter-spacing: 0.05rem;
+    }
+
+    /* Admin Responsive */
+    .admin-container {
+        padding: 0.5rem;
+    }
+
+    .dashboard-header h2 {
+        font-size: 1.6rem;
+    }
+
+    .export-btn, .logout-btn {
+        font-size: 1.2rem;
+        padding: 0.8rem;
+    }
+
+    .admin-dashboard {
+        padding: 0.5rem;
+    }
+
+    .stat-card {
+        padding: 1rem;
+    }
+
+    .stat-card h3 {
+        font-size: 2rem;
+    }
+
+    .stat-card p {
+        font-size: 1.1rem;
+    }
+
+    .rsvp-table-container {
+        padding: 0.3rem;
+    }
+
+    .rsvp-table th,
+    .rsvp-table td {
+        padding: 0.6rem;
+        font-size: 1rem;
+    }
+
+    .rsvp-table th {
+        font-size: 1.1rem;
+    }
+
+    .admin-login {
+        padding: 1.2rem;
+        margin: 1rem auto;
     }
 }
 
