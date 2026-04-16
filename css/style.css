@@ -559,6 +559,11 @@ strong, b {
     box-sizing: border-box;
 }
 
+.custom-select-trigger span {
+    display: inline;
+    white-space: nowrap;
+}
+
 .custom-select-trigger .arrow {
     position: absolute;
     right: 1rem;
@@ -600,6 +605,9 @@ strong, b {
     font-family: 'Inversionz', 'Righteous', sans-serif;
     color: #00FF00;
     transition: background 0.2s;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .custom-option:hover,
