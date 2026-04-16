@@ -76,14 +76,17 @@ document.addEventListener('DOMContentLoaded', function() {
         }, (error) => {
             console.error('Error loading RSVPs:', error);
             document.getElementById('rsvp-table-body').innerHTML =
-                '<tr><td colspan="5" class="no-data">Error loading RSVPs</td></tr>';
+                '<tr><td colspan="6" class="no-data">Error loading RSVPs</td></tr>';
         });
     }
 
     // Update statistics
     function updateStats() {
         const totalRsvps = allRsvps.length;
-        const totalGuests = allRsvps.length; // Each RSVP is 1 guest
+        // Calculate total attendees: each RSVP (1 person) + their guests
+        const totalGuests = allRsvps.reduce((sum, rsvp) => {
+            return sum + 1 + (parseInt(rsvp.guests) || 0);
+        }, 0);
 
         document.getElementById('total-rsvps').textContent = totalRsvps;
         document.getElementById('total-guests').textContent = totalGuests;
@@ -94,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const tbody = document.getElementById('rsvp-table-body');
 
         if (rsvps.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="5" class="no-data">No RSVPs yet</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="6" class="no-data">No RSVPs yet</td></tr>';
             return;
         }
 
@@ -103,6 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <td>${formatDate(rsvp.date)}</td>
                 <td>${escapeHtml(rsvp.name)}</td>
                 <td>${escapeHtml(rsvp.phone || '-')}</td>
+                <td>${rsvp.guests || 0}</td>
                 <td>${escapeHtml(rsvp.note || '-')}</td>
                 <td>
                     <button class="delete-btn" onclick="window.deleteRSVP('${rsvp.id}')">Delete</button>
@@ -144,11 +148,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Convert RSVPs to CSV
     function convertToCSV(data) {
-        const headers = ['Date', 'Name', 'Phone', 'Note'];
+        const headers = ['Date', 'Name', 'Phone', 'Guests', 'Note'];
         const rows = data.map(rsvp => [
             formatDate(rsvp.date),
             rsvp.name,
             rsvp.phone || '',
+            rsvp.guests || 0,
             rsvp.note || ''
         ]);
 
