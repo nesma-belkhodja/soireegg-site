@@ -109,14 +109,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 <td>${rsvp.guests || 0}</td>
                 <td>${escapeHtml(rsvp.note || '-')}</td>
                 <td>
-                    <button class="delete-btn" onclick="window.deleteRSVP('${rsvp.id}')">Delete</button>
+                    <button class="delete-btn" data-id="${rsvp.id}">Delete</button>
                 </td>
             </tr>
         `).join('');
     }
 
-    // Delete RSVP function (exposed globally)
-    window.deleteRSVP = function(id) {
+    // Delete RSVP function using event delegation
+    function deleteRSVP(id) {
         if (confirm('Are you sure you want to delete this RSVP?')) {
             const rsvpRef = ref(database, `rsvps/${id}`);
             remove(rsvpRef)
@@ -128,7 +128,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     alert('Error deleting RSVP. Please try again.');
                 });
         }
-    };
+    }
+
+    // Event delegation for delete buttons
+    document.getElementById('rsvp-table-body').addEventListener('click', function(e) {
+        if (e.target && e.target.classList.contains('delete-btn')) {
+            const id = e.target.getAttribute('data-id');
+            deleteRSVP(id);
+        }
+    });
 
     // Search functionality
     searchInput.addEventListener('input', function(e) {
