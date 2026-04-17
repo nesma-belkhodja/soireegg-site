@@ -101,14 +101,15 @@ function loadGalleryImages() {
     "images/2023 Photos/IMG_0215.PNG",
   ];
 
-  // Replace placeholders with actual images
+  // Replace placeholders with actual images using lazy loading
   if (images2025.length > 0) {
     galleries["2025"].innerHTML = "";
     images2025.forEach((src) => {
       const img = document.createElement("img");
-      img.src = src;
+      img.dataset.src = src; // Use data-src for lazy loading
       img.alt = "PROEGGBITION 2025";
-      img.classList.add("gallery-img");
+      img.classList.add("gallery-img", "lazy-load");
+      img.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%23111'/%3E%3C/svg%3E"; // Placeholder
       galleries["2025"].appendChild(img);
     });
   }
@@ -117,9 +118,10 @@ function loadGalleryImages() {
     galleries["2024"].innerHTML = "";
     images2024.forEach((src) => {
       const img = document.createElement("img");
-      img.src = src;
+      img.dataset.src = src; // Use data-src for lazy loading
       img.alt = "ALTEREGGO 2024";
-      img.classList.add("gallery-img");
+      img.classList.add("gallery-img", "lazy-load");
+      img.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%23111'/%3E%3C/svg%3E"; // Placeholder
       galleries["2024"].appendChild(img);
     });
   }
@@ -128,12 +130,16 @@ function loadGalleryImages() {
     galleries["2023"].innerHTML = "";
     images2023.forEach((src) => {
       const img = document.createElement("img");
-      img.src = src;
+      img.dataset.src = src; // Use data-src for lazy loading
       img.alt = "BAROQUE EGGPUNK 2023";
-      img.classList.add("gallery-img");
+      img.classList.add("gallery-img", "lazy-load");
+      img.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%23111'/%3E%3C/svg%3E"; // Placeholder
       galleries["2023"].appendChild(img);
     });
   }
+
+  // Initialize lazy loading
+  lazyLoadImages();
 }
 
 // Lightbox functionality
@@ -197,6 +203,36 @@ function setupLightbox() {
   });
 
   function showImage(index) {
-    lightboxImg.src = currentImages[index].src;
+    lightboxImg.src = currentImages[index].dataset.src || currentImages[index].src;
   }
+}
+
+// Lazy loading function using Intersection Observer
+function lazyLoadImages() {
+  const lazyImages = document.querySelectorAll('.lazy-load');
+
+  // Fallback for browsers that don't support Intersection Observer
+  if (!('IntersectionObserver' in window)) {
+    lazyImages.forEach(img => {
+      img.src = img.dataset.src;
+      img.classList.remove('lazy-load');
+    });
+    return;
+  }
+
+  const imageObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const img = entry.target;
+        img.src = img.dataset.src;
+        img.classList.remove('lazy-load');
+        img.classList.add('loaded');
+        observer.unobserve(img);
+      }
+    });
+  }, {
+    rootMargin: '50px' // Start loading 50px before image enters viewport
+  });
+
+  lazyImages.forEach(img => imageObserver.observe(img));
 }

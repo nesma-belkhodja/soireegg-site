@@ -325,6 +325,17 @@ strong, b {
     -webkit-tap-highlight-color: transparent;
 }
 
+.photo-grid img.lazy-load {
+    opacity: 0.3;
+    filter: blur(5px);
+}
+
+.photo-grid img.loaded {
+    opacity: 1;
+    filter: blur(0);
+    transition: opacity 0.5s ease, filter 0.5s ease;
+}
+
 .photo-grid img:hover {
     transform: scale(1.05);
     box-shadow: 0 0 20px #00FF00;
