@@ -36,16 +36,16 @@
             <label for="guests">RSVP</label>
             <div class="custom-select" id="custom-select">
               <div class="custom-select-trigger">
-                <span id="selected-value">0</span>
+                <span id="selected-value">1</span>
                 <div class="arrow"></div>
               </div>
               <div class="custom-options">
-                <div class="custom-option selected" data-value="0">0</div>
-                <div class="custom-option" data-value="1">1</div>
+                <div class="custom-option selected" data-value="1">1</div>
                 <div class="custom-option" data-value="2">2</div>
+                <div class="custom-option" data-value="3">3</div>
               </div>
             </div>
-            <input type="hidden" id="guests" name="guests" value="0" />
+            <input type="hidden" id="guests" name="guests" value="1" />
           </div>
 
           <div class="form-group">
@@ -149,8 +149,8 @@
 
           // Reset form
           rsvpForm.reset();
-          selectedValueSpan.textContent = "0";
-          hiddenInput.value = "0";
+          selectedValueSpan.textContent = "1";
+          hiddenInput.value = "1";
           options.forEach((opt) => opt.classList.remove("selected"));
           options[0].classList.add("selected");
 

@@ -83,9 +83,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Update statistics
     function updateStats() {
         const totalRsvps = allRsvps.length;
-        // Calculate total attendees: each RSVP (1 person) + their guests
+        // Calculate total attendees: guests value now represents total attendees (1 = alone, 2 = with 1 guest, etc.)
         const totalGuests = allRsvps.reduce((sum, rsvp) => {
-            return sum + 1 + (parseInt(rsvp.guests) || 0);
+            return sum + (parseInt(rsvp.guests) || 1);
         }, 0);
 
         document.getElementById('total-rsvps').textContent = totalRsvps;
